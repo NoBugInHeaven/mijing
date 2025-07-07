@@ -689,11 +689,13 @@
                 </p>
 
                 <div class="mb-6">
-                    <form id="email-form" class="flex gap-3">
+                    <form id="email-form" class="flex flex-col gap-4">
                         <input type="email" id="email-input" placeholder="您的常用邮箱地址"
                             class="w-full bg-dark-200 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary">
                         <button type="submit"
-                            class="bg-primary hover:bg-primary/80 text-white px-4 py-3 rounded-lg transition-colors">保存</button>
+                            class="w-full bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary text-white py-3 rounded-lg font-medium transition-all hover:shadow-lg hover:shadow-primary/20">
+                            提交申请，锁定席位
+                        </button>
                     </form>
 
                     <script>
@@ -712,6 +714,11 @@
                                 if (response.ok) {
                                     alert('邮箱保存成功！');
                                     document.getElementById('email-input').value = '';
+                                    // 使用样式类控制弹窗关闭，保留DOM结构以便再次打开
+                                    const modal = document.getElementById('invite-modal');
+                                    modal.classList.add('opacity-0', 'pointer-events-none');
+                                    modal.querySelector('div').classList.remove('scale-100');
+                                    modal.querySelector('div').classList.add('scale-95');
                                 } else {
                                     alert('保存失败，请稍后重试');
                                 }
@@ -722,10 +729,7 @@
                     </script>
                 </div>
 
-                <button id="apply-button"
-                    class="w-full bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary text-white py-3 rounded-lg font-medium transition-all hover:shadow-lg hover:shadow-primary/20">
-                    提交申请，锁定席位
-                </button>
+
 
                 <div class="mt-6 text-center">
                     <button id="switch-to-code" class="text-gray-400 hover:text-white font-medium transition-colors">
